@@ -2,7 +2,8 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": { "project": "tsconfig.json" },
   "env": { "browser": true, "es6": true, "worker": true }, // for allowJs
-  "settings": { "react": { "version": "detect" } },
+  // see https://github.com/preactjs/preact-cli/blob/v3.0.0-rc.9/.eslintrc#L20
+  "settings": { "react": { "version": "preact", "pragma": "h" } },
   "plugins": ["@typescript-eslint", "react-hooks"],
   "extends": [
     "eslint:recommended",
@@ -18,7 +19,8 @@
     // see https://reactjs.org/docs/hooks-rules
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/no-unknown-property": [2, { "ignore": ["class"] }]
   },
   "overrides": [
     // see https://github.com/typescript-eslint/typescript-eslint/issues/906
