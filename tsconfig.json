@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    // see https://github.com/microsoft/TypeScript/issues/16675
+    "module": "esnext",
+    "allowJs": true,
+    // "checkJs": true,
+    "jsx": "react",
+    "sourceMap": true,
+    "outDir": "dist", // for allowJs
+    "strict": true,
+    // "noImplicitAny": false, // for checkJs
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  // see https://github.com/typescript-eslint/typescript-eslint/issues/890
+  "include": ["src/**/*"]
+}

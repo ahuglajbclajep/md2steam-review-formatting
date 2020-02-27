@@ -1,0 +1,30 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": { "project": "tsconfig.json" },
+  "env": { "browser": true, "es6": true, "worker": true }, // for allowJs
+  "settings": { "react": { "version": "detect" } },
+  "plugins": ["@typescript-eslint", "react-hooks"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
+  "rules": {
+    // see https://reactjs.org/docs/hooks-rules
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off"
+  },
+  "overrides": [
+    // see https://github.com/typescript-eslint/typescript-eslint/issues/906
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": { "@typescript-eslint/explicit-function-return-type": "off" }
+    }
+  ]
+}
