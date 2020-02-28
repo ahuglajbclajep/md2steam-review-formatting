@@ -1,5 +1,3 @@
-# my-react-template
+# md2steam-formatting
 
-My React + TypeScript template for [VS Code](https://code.visualstudio.com).
-
-[vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) are required.
+An experimental editor that converts Markdown to [Steam Text Formatting](https://steamcommunity.com/comment/Recommendation/formattinghelp).

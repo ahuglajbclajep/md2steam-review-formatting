@@ -1,7 +1,7 @@
 {
-  "name": "my-react-template",
+  "name": "md2steam-formatting",
   "version": "1.0.0",
-  "description": "",
+  "description": "An experimental editor that converts Markdown to Steam Text Formatting.",
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --open",
