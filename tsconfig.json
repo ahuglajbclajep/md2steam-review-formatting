@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017", // for async/await
-    // see https://github.com/microsoft/TypeScript/issues/16675
-    "module": "esnext",
+    "module": "esnext", // for dynamic import
     "allowJs": true,
     "jsx": "react",
     "jsxFactory": "h",

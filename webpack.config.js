@@ -10,6 +10,7 @@ module.exports = (env, { mode }) => {
     // see https://github.com/webpack/webpack-dev-server/issues/1327
     mode: "development",
     entry: "./src/index.tsx",
+    output: { globalObject: "self" }, // for dynamic import in worker
     module: {
       rules: [
         {

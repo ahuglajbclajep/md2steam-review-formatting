@@ -10,14 +10,17 @@
   },
   "dependencies": {
     "comlink": "^4.2.0",
+    "idb-keyval": "^3.2.0",
     "morphdom": "^2.5.12",
     "preact": "^10.3.2",
+    "prettier": "^1.19.1",
     "rehype-stringify": "^6.0.1",
     "remark-parse": "^7.0.2",
     "remark-rehype": "^5.0.0",
     "unified": "^8.4.2"
   },
   "devDependencies": {
+    "@types/prettier": "^1.19.0",
     "@types/webpack": "^4.41.6",
     "@types/webpack-dev-server": "^3.10.0",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
@@ -31,7 +34,6 @@
     "html-webpack-plugin": "^4.0.0-beta.11",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "prettier": "^1.19.1",
     "ts-loader": "^6.2.1",
     "typescript": "^3.8.2",
     "webpack": "^4.41.6",
