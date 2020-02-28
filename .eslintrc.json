@@ -20,7 +20,8 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
-    "react/no-unknown-property": [2, { "ignore": ["class"] }]
+    "react/no-unknown-property": [2, { "ignore": ["class"] }],
+    "@typescript-eslint/no-use-before-define": ["error", "nofunc"]
   },
   "overrides": [
     // see https://github.com/typescript-eslint/typescript-eslint/issues/906

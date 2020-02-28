@@ -1,25 +1,29 @@
 import { FunctionComponent, h, JSX } from "preact";
 import { useLayoutEffect, useState } from "preact/hooks";
 import HtmlPreview from "./HtmlPreview";
-import { format, load, md2html, save } from "./worker";
+import { convert, format, load, save } from "./lib/worker";
 
 const App: FunctionComponent = () => {
   const [markdown, setMarkdown] = useState("");
   const [html, setHtml] = useState("");
+  const [steam, setSteam] = useState("");
 
   // see https://reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks
   useLayoutEffect(() => {
     (async (): Promise<void> => {
       const markdown = await load();
-      const html = await md2html(markdown);
       setMarkdown(markdown);
+      const [html, steam] = await convert(markdown);
       setHtml(html);
+      setSteam(steam);
     })();
   }, []);
 
   const onInput: JSX.GenericEventHandler<HTMLTextAreaElement> = async e => {
     setMarkdown(e.currentTarget.value);
-    setHtml(await md2html(e.currentTarget.value));
+    const [html, steam] = await convert(e.currentTarget.value);
+    setHtml(html);
+    setSteam(steam);
   };
 
   const onKeyDown: JSX.KeyboardEventHandler<HTMLDivElement> = async e => {
@@ -37,7 +41,7 @@ const App: FunctionComponent = () => {
     <div class="container" onKeyDown={onKeyDown}>
       <textarea class="edit-area" value={markdown} onInput={onInput} />
       <HtmlPreview html={html} />
-      <pre />
+      <pre>{steam}</pre>
     </div>
   );
 };

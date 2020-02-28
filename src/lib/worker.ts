@@ -2,10 +2,11 @@
 /* eslint-disable @typescript-eslint/require-await */
 
 import { get, set } from "idb-keyval";
-import stringify from "rehype-stringify";
+import hastStringify from "rehype-stringify";
 import parse from "remark-parse";
 import mutate from "remark-rehype";
 import unified from "unified";
+import mdastStringify from "./mdast-stringify";
 
 let formatter: typeof import("prettier/standalone") | undefined;
 let plugin: typeof import("prettier/parser-markdown") | undefined;
@@ -19,13 +20,21 @@ let plugin: typeof import("prettier/parser-markdown") | undefined;
 const readme = `# md2steam-formatting
 `;
 
-async function md2html(markdown: string): Promise<string> {
-  return unified()
+async function convert(markdown: string): Promise<[string, string]> {
+  const html = unified()
     .use(parse)
     .use(mutate)
-    .use(stringify)
+    .use(hastStringify)
     .processSync(markdown)
     .toString();
+
+  const steam = unified()
+    .use(parse)
+    .use(mdastStringify)
+    .processSync(markdown)
+    .toString();
+
+  return [html, steam];
 }
 
 async function save(markdown: string): Promise<void> {
@@ -42,4 +51,4 @@ async function format(markdown: string): Promise<string> {
     : markdown;
 }
 
-export { md2html, save, load, format };
+export { convert, save, load, format };
