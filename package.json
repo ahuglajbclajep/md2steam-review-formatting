@@ -9,13 +9,19 @@
     "lint": "eslint --fix src/**/*.[tj]s{,x}"
   },
   "dependencies": {
-    "preact": "^10.3.2"
+    "comlink": "^4.2.0",
+    "preact": "^10.3.2",
+    "rehype-stringify": "^6.0.1",
+    "remark-parse": "^7.0.2",
+    "remark-rehype": "^5.0.0",
+    "unified": "^8.4.2"
   },
   "devDependencies": {
     "@types/webpack": "^4.41.6",
     "@types/webpack-dev-server": "^3.10.0",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
+    "comlink-loader": "^2.0.0",
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2017", // for async/await
     // see https://github.com/microsoft/TypeScript/issues/16675
     "module": "esnext",
     "allowJs": true,

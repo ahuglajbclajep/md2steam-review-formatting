@@ -13,6 +13,10 @@ module.exports = (env, { mode }) => {
     module: {
       rules: [
         {
+          test: /\.?worker\.[tj]s$/,
+          use: "comlink-loader?singleton&name=[name].js"
+        },
+        {
           test: /\.[tj]sx?$/,
           use: "ts-loader",
           exclude: /node_modules/
