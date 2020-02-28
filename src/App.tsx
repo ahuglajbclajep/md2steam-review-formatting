@@ -1,5 +1,6 @@
 import { FunctionComponent, h, JSX } from "preact";
 import { useState } from "preact/hooks";
+import HtmlPreview from "./HtmlPreview";
 import { md2html } from "./worker";
 
 const App: FunctionComponent = () => {
@@ -14,7 +15,7 @@ const App: FunctionComponent = () => {
   return (
     <div class="container">
       <textarea class="edit-area" value={markdown} onInput={onInput} />
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <HtmlPreview html={html} />
       <pre />
     </div>
   );
