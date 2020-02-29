@@ -1,5 +1,6 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { GenerateSW } = require("workbox-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin"); // from webpack
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
@@ -29,10 +30,16 @@ module.exports = (env, { mode }) => {
       ]
     },
     plugins: [
-      new MiniCssExtractPlugin(),
       new HtmlWebpackPlugin({
         template: "src/index.ejs",
         title: process.env.npm_package_name
+      }),
+      new MiniCssExtractPlugin(),
+      new GenerateSW({
+        clientsClaim: true,
+        skipWaiting: true,
+        inlineWorkboxRuntime: true,
+        sourcemap: dev
       })
     ],
     resolve: { extensions: [".ts", ".tsx", ".js", ".jsx"] },
