@@ -6,6 +6,7 @@ import hastStringify from "rehype-stringify";
 import parse from "remark-parse";
 import mutate from "remark-rehype";
 import unified from "unified";
+import { Node } from "unist";
 import mdastStringify from "./mdast-stringify";
 
 let formatter: typeof import("prettier/standalone") | undefined;
@@ -21,20 +22,26 @@ const readme = `# md2steam-formatting
 `;
 
 async function convert(markdown: string): Promise<[string, string]> {
-  const html = unified()
+  const mdast = unified()
     .use(parse)
-    .use(mutate)
-    .use(hastStringify)
-    .processSync(markdown)
-    .toString();
+    .parse(markdown);
 
-  const steam = unified()
-    .use(parse)
-    .use(mdastStringify)
-    .processSync(markdown)
-    .toString();
+  const mdast2html = async (mdast: Node): Promise<string> => {
+    const hast = await unified()
+      .use(mutate)
+      .run(mdast);
 
-  return [html, steam];
+    return unified()
+      .use(hastStringify)
+      .stringify(hast);
+  };
+
+  return await Promise.all([
+    mdast2html(mdast),
+    unified()
+      .use(mdastStringify)
+      .stringify(mdast)
+  ]);
 }
 
 async function save(markdown: string): Promise<void> {
