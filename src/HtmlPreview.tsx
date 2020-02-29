@@ -8,13 +8,13 @@ const Preview: FunctionComponent<Props> = ({ html }) => {
 
   useLayoutEffect(() => {
     const request = requestAnimationFrame(() => {
-      morphdom(ref.current, `<div>${html}</div>`);
+      morphdom(ref.current, `<div class="html-preview">${html}</div>`);
     });
 
     return (): void => cancelAnimationFrame(request);
   });
 
-  return <div ref={ref} />;
+  return <div class="html-preview" ref={ref} />;
 };
 
 export default Preview;

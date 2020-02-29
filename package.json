@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack -p",
-    "lint": "eslint --fix src/**/*.[tj]s{,x}"
+    "lint:ts": "eslint --fix 'src/**/*.[tj]s{,x}'",
+    "lint:css": "stylelint --fix 'src/**/*.css'"
   },
   "dependencies": {
     "comlink": "^4.2.0",
@@ -34,6 +35,10 @@
     "html-webpack-plugin": "^4.0.0-beta.11",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "stylelint": "^13.2.0",
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-recess-order": "^2.0.3",
+    "stylelint-config-standard": "^20.0.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.8.2",
     "webpack": "^4.41.6",

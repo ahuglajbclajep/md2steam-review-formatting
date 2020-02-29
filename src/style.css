@@ -5,8 +5,8 @@
 }
 
 * {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 :focus {
@@ -14,23 +14,23 @@
 }
 
 .container {
-  height: 100vh;
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
+  height: 100vh;
   border: solid #a9a9a9;
   border-width: 1px 0 0 1px;
 }
 
 .container > * {
   overflow-y: scroll;
+  color: #10151a;
+  background: #fafafa;
   border: solid #a9a9a9;
   border-width: 0 1px 1px 0;
-  background: #fafafa;
-  color: #10151a;
 }
 
 .edit-area {
   grid-row: 1 / 3;
-  resize: none;
   font: 1.1em "Courier New", monospace;
+  resize: none;
 }
