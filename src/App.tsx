@@ -27,13 +27,16 @@ const App: FunctionComponent = () => {
   };
 
   const onKeyDown: JSX.KeyboardEventHandler<HTMLDivElement> = async e => {
-    if (e.ctrlKey && e.key === "f") {
+    if (e.ctrlKey && e.key === "s") {
+      e.preventDefault();
+      save(markdown);
+    } else if (e.ctrlKey && e.key === "d") {
+      e.preventDefault();
+      navigator.clipboard.writeText(steam);
+    } else if (e.ctrlKey && e.key === "f") {
       e.preventDefault();
       const formatted = await format(markdown);
       setMarkdown(formatted);
-    } else if (e.ctrlKey && e.key === "s") {
-      e.preventDefault();
-      save(markdown);
     }
   };
 
