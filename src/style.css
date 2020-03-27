@@ -31,6 +31,7 @@
 .container > * {
   padding: 1em;
   overflow-y: scroll;
+  font: 1em "Courier New", monospace;
   color: #acb2b8;
   overflow-wrap: break-word;
   background: #1b2838;
@@ -39,7 +40,6 @@
 
 .markdown-edit {
   grid-row: 1 / 3;
-  font: 1.1em "Courier New", monospace;
   resize: none;
 }
 
@@ -49,8 +49,27 @@
   border-bottom-width: 1px;
 }
 
+.html-preview h1 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 24px;
+  color: #5aa9d6;
+}
+
+.html-preview h2 {
+  margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 22px;
+  color: #5aa9d6;
+}
+
+.html-preview h3 {
+  margin-bottom: 8px;
+  line-height: 20px;
+  color: #5aa9d6;
+}
+
 .steam-formatting {
-  font: 1.1em "Courier New", monospace;
   white-space: pre-wrap;
   border: 0 solid #35465e;
   border-top-width: 1px;

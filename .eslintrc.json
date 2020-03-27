@@ -20,7 +20,7 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
-    "react/no-unknown-property": [2, { "ignore": ["class"] }],
+    "react/no-unknown-property": [2, { "ignore": ["class", "spellcheck"] }],
     "@typescript-eslint/no-use-before-define": ["error", "nofunc"]
   },
   "overrides": [

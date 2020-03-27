@@ -42,7 +42,12 @@ const App: FunctionComponent = () => {
 
   return (
     <div class="container" onKeyDown={onKeyDown}>
-      <textarea class="markdown-edit" value={markdown} onInput={onInput} />
+      <textarea
+        class="markdown-edit"
+        value={markdown}
+        spellcheck={false}
+        onInput={onInput}
+      />
       <HtmlPreview html={html} />
       <pre class="steam-formatting">{steam}</pre>
     </div>
