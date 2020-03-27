@@ -12,16 +12,18 @@ const App: FunctionComponent = () => {
   useLayoutEffect(() => {
     (async (): Promise<void> => {
       const markdown = await load();
-      setMarkdown(markdown);
       const [html, steam] = await convert(markdown);
+      setMarkdown(markdown);
       setHtml(html);
       setSteam(steam);
     })();
   }, []);
 
   const onInput: JSX.GenericEventHandler<HTMLTextAreaElement> = async e => {
-    setMarkdown(e.currentTarget.value);
-    const [html, steam] = await convert(e.currentTarget.value);
+    // maybe `currentTarget.value` can only be read once?
+    const markdown = e.currentTarget.value;
+    const [html, steam] = await convert(markdown);
+    setMarkdown(markdown);
     setHtml(html);
     setSteam(steam);
   };
