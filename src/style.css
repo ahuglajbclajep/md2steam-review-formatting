@@ -7,6 +7,15 @@
 * {
   padding: 0;
   margin: 0;
+  scrollbar-color: #101822 #141f2c;
+}
+
+::-webkit-scrollbar {
+  background-color: #141f2c;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #101822;
 }
 
 :focus {
@@ -17,20 +26,32 @@
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
   height: 100vh;
-  border: solid #a9a9a9;
-  border-width: 1px 0 0 1px;
 }
 
 .container > * {
+  padding: 1em;
   overflow-y: scroll;
-  color: #10151a;
-  background: #fafafa;
-  border: solid #a9a9a9;
-  border-width: 0 1px 1px 0;
+  color: #acb2b8;
+  overflow-wrap: break-word;
+  background: #1b2838;
+  border: 0;
 }
 
-.edit-area {
+.markdown-edit {
   grid-row: 1 / 3;
   font: 1.1em "Courier New", monospace;
   resize: none;
+}
+
+.html-preview {
+  font-family: Arial, Helvetica, Verdana, sans-serif;
+  border: 0 solid #35465e;
+  border-bottom-width: 1px;
+}
+
+.steam-formatting {
+  font: 1.1em "Courier New", monospace;
+  white-space: pre-wrap;
+  border: 0 solid #35465e;
+  border-top-width: 1px;
 }
