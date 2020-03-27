@@ -1,5 +1,6 @@
 import { FunctionComponent, h, JSX } from "preact";
 import { useLayoutEffect, useState } from "preact/hooks";
+import { useCtrlKeyDown } from "./hooks";
 import HtmlPreview from "./HtmlPreview";
 import { convert, format, load, save } from "./lib/worker";
 
@@ -19,6 +20,10 @@ const App: FunctionComponent = () => {
     })();
   }, []);
 
+  useCtrlKeyDown("s", () => save(markdown));
+  useCtrlKeyDown("d", () => navigator.clipboard.writeText(steam));
+  useCtrlKeyDown("f", async () => setMarkdown(await format(markdown)));
+
   const onInput: JSX.GenericEventHandler<HTMLTextAreaElement> = async e => {
     // maybe `currentTarget.value` can only be read once?
     const markdown = e.currentTarget.value;
@@ -28,22 +33,8 @@ const App: FunctionComponent = () => {
     setSteam(steam);
   };
 
-  const onKeyDown: JSX.KeyboardEventHandler<HTMLDivElement> = async e => {
-    if (e.ctrlKey && e.key === "s") {
-      e.preventDefault();
-      save(markdown);
-    } else if (e.ctrlKey && e.key === "d") {
-      e.preventDefault();
-      navigator.clipboard.writeText(steam);
-    } else if (e.ctrlKey && e.key === "f") {
-      e.preventDefault();
-      const formatted = await format(markdown);
-      setMarkdown(formatted);
-    }
-  };
-
   return (
-    <div class="container" onKeyDown={onKeyDown}>
+    <div class="container">
       <textarea
         class="markdown-edit"
         value={markdown}
