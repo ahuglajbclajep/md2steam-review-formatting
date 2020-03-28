@@ -22,31 +22,37 @@
   outline: none;
 }
 
-#root-container {
+body {
+  overscroll-behavior: none;
+  background: #1b2838; /* for overscrolling in Safari */
+}
+
+.container {
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
   height: 100vh;
 }
 
-#root-container > * {
+.container > * {
   padding: 1em;
   overflow-y: scroll;
   font: 1em "Courier New", monospace;
   color: #acb2b8;
   overflow-wrap: break-word;
   background: #1b2838;
-  border: 0;
+  border: 0 solid #35465e;
 }
 
 .markdown-edit {
   grid-row: 1 / 3;
   resize: none;
+  border-right-width: 1px;
+  border-radius: 0; /* for iOS Safari */
 }
 
 .html-preview {
   font-family: Arial, Helvetica, Verdana, sans-serif;
-  border: 0 solid #35465e;
-  border-bottom-width: 1px;
+  border-width: 0 0 1px 1px;
 }
 
 .html-preview h1 {
@@ -71,6 +77,5 @@
 
 .steam-formatting {
   white-space: pre-wrap;
-  border: 0 solid #35465e;
-  border-top-width: 1px;
+  border-width: 1px 0 0 1px;
 }

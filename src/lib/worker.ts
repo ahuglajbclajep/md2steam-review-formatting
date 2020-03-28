@@ -37,11 +37,11 @@ async function convert(markdown: string): Promise<[string, string]> {
 }
 
 async function save(markdown: string): Promise<void> {
-  set("markdown", markdown);
+  set("md2st-markdown", markdown);
 }
 
 async function load(): Promise<string> {
-  return (await get<string | undefined>("markdown")) || readme;
+  return (await get<string | undefined>("md2st-markdown")) || readme;
 }
 
 async function format(markdown: string): Promise<string> {
