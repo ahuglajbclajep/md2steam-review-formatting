@@ -5,10 +5,11 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build": "webpack -p",
+    "build": "rm -rf dist && webpack -p",
     "lint:ts": "eslint --fix 'src/**/*.[tj]s{,x}'",
     "lint:css": "stylelint --fix 'src/**/*.css'",
-    "format": "prettier --ignore-path .gitignore --write ."
+    "format": "prettier --ignore-path .gitignore --write .",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "comlink": "^4.2.0",
@@ -33,6 +34,7 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
+    "gh-pages": "^2.2.0",
     "html-webpack-plugin": "^4.0.2",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
