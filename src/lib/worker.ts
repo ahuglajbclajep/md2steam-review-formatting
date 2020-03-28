@@ -1,7 +1,6 @@
 // see https://github.com/GoogleChromeLabs/comlink-loader#singleton-mode
 /* eslint-disable @typescript-eslint/require-await */
 
-import { get, set } from "idb-keyval";
 import hastStringify from "rehype-stringify";
 import parse from "remark-parse";
 import mutate from "remark-rehype";
@@ -18,15 +17,11 @@ let plugin: typeof import("prettier/parser-markdown") | undefined;
   ] as const);
 })();
 
-const readme = `# md2steam-formatting
-`;
-
 async function convert(markdown: string): Promise<[string, string]> {
   const mdast = unified().use(parse).parse(markdown);
 
   const mdast2html = async (mdast: Node): Promise<string> => {
     const hast = await unified().use(mutate).run(mdast);
-
     return unified().use(hastStringify).stringify(hast);
   };
 
@@ -36,18 +31,10 @@ async function convert(markdown: string): Promise<[string, string]> {
   ]);
 }
 
-async function save(markdown: string): Promise<void> {
-  set("md2st-markdown", markdown);
-}
-
-async function load(): Promise<string> {
-  return (await get<string | undefined>("md2st-markdown")) || readme;
-}
-
 async function format(markdown: string): Promise<string> {
   return formatter && plugin
     ? formatter.format(markdown, { parser: "markdown", plugins: [plugin] })
     : markdown;
 }
 
-export { convert, save, load, format };
+export { convert, format };

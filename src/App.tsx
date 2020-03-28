@@ -1,17 +1,21 @@
 import { Fragment, FunctionComponent, h, JSX } from "preact";
 import { useState } from "preact/hooks";
-import { useCtrlKeyDown, useEffectAsync } from "./hooks";
+import { useCtrlKeyDown, useEffectAsync, useStorage } from "./hooks";
 import HtmlPreview from "./HtmlPreview";
-import { convert, format, load, save } from "./lib/worker";
+import { convert, format } from "./lib/worker";
+
+const readme = `# md2steam-formatting
+`;
 
 const App: FunctionComponent = () => {
   const [markdown, setMarkdown] = useState("");
   const [html, setHtml] = useState("");
   const [steam, setSteam] = useState("");
+  const [save, load] = useStorage<string>("md2st-markdown");
 
   // see https://reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks
   useEffectAsync(async () => {
-    const markdown = await load();
+    const markdown = (await load()) || readme;
     const [html, steam] = await convert(markdown);
     setMarkdown(markdown);
     setHtml(html);
