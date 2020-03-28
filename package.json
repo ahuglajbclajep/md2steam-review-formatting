@@ -7,7 +7,8 @@
     "start": "webpack-dev-server --open",
     "build": "webpack -p",
     "lint:ts": "eslint --fix 'src/**/*.[tj]s{,x}'",
-    "lint:css": "stylelint --fix 'src/**/*.css'"
+    "lint:css": "stylelint --fix 'src/**/*.css'",
+    "format": "prettier --ignore-path .gitignore --write ."
   },
   "dependencies": {
     "comlink": "^4.2.0",

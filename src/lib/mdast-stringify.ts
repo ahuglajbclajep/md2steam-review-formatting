@@ -25,7 +25,7 @@ const visitors: Record<string, (node: any) => string> = {
   strong: strong,
   delete: deleteFn,
   break: () => "",
-  link: () => ""
+  link: () => "",
 };
 
 function one(node: Node): string {
@@ -34,7 +34,7 @@ function one(node: Node): string {
 }
 
 function all(parent: Parent): string {
-  return parent.children.map(n => one(n)).join("");
+  return parent.children.map((n) => one(n)).join("");
 }
 
 function helper(tag: string, node: Parent): string {

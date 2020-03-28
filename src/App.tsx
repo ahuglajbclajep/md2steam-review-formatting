@@ -22,7 +22,7 @@ const App: FunctionComponent = () => {
   useCtrlKeyDown("d", () => navigator.clipboard.writeText(steam));
   useCtrlKeyDown("f", async () => setMarkdown(await format(markdown)));
 
-  const onInput: JSX.GenericEventHandler<HTMLTextAreaElement> = async e => {
+  const onInput: JSX.GenericEventHandler<HTMLTextAreaElement> = async (e) => {
     // maybe `currentTarget.value` can only be read once?
     const markdown = e.currentTarget.value;
     const [html, steam] = await convert(markdown);
