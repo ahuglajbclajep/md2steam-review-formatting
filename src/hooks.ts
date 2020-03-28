@@ -1,7 +1,17 @@
-import { useEffect, useRef } from "preact/hooks";
+import { Inputs, useEffect, useRef } from "preact/hooks";
+
+const useEffectAsync = (
+  // cleanup function is not supported
+  effect: () => Promise<void>,
+  inputs: Inputs = []
+): void => {
+  useEffect(() => {
+    effect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, inputs);
+};
 
 type Handler = (e: KeyboardEvent) => void | Promise<void>;
-
 const useCtrlKeyDown = (key: string, handler: Handler): void => {
   // see https://reactjs.org/docs/hooks-faq.html#what-can-i-do-if-my-effect-dependencies-change-too-often
   const ref = useRef<Handler>(null);
@@ -20,7 +30,9 @@ const useCtrlKeyDown = (key: string, handler: Handler): void => {
     return (): void => {
       window.removeEventListener("keydown", listener);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 
-export { useCtrlKeyDown };
+export { useEffectAsync, useCtrlKeyDown };

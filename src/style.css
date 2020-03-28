@@ -22,13 +22,13 @@
   outline: none;
 }
 
-.container {
+#root-container {
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
   height: 100vh;
 }
 
-.container > * {
+#root-container > * {
   padding: 1em;
   overflow-y: scroll;
   font: 1em "Courier New", monospace;

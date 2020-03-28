@@ -1,6 +1,6 @@
-import { FunctionComponent, h, JSX } from "preact";
-import { useLayoutEffect, useState } from "preact/hooks";
-import { useCtrlKeyDown } from "./hooks";
+import { Fragment, FunctionComponent, h, JSX } from "preact";
+import { useState } from "preact/hooks";
+import { useCtrlKeyDown, useEffectAsync } from "./hooks";
 import HtmlPreview from "./HtmlPreview";
 import { convert, format, load, save } from "./lib/worker";
 
@@ -10,14 +10,12 @@ const App: FunctionComponent = () => {
   const [steam, setSteam] = useState("");
 
   // see https://reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks
-  useLayoutEffect(() => {
-    (async (): Promise<void> => {
-      const markdown = await load();
-      const [html, steam] = await convert(markdown);
-      setMarkdown(markdown);
-      setHtml(html);
-      setSteam(steam);
-    })();
+  useEffectAsync(async () => {
+    const markdown = await load();
+    const [html, steam] = await convert(markdown);
+    setMarkdown(markdown);
+    setHtml(html);
+    setSteam(steam);
   }, []);
 
   useCtrlKeyDown("s", () => save(markdown));
@@ -34,7 +32,8 @@ const App: FunctionComponent = () => {
   };
 
   return (
-    <div class="container">
+    // see https://github.com/microsoft/TypeScript/issues/20469
+    <Fragment>
       <textarea
         class="markdown-edit"
         value={markdown}
@@ -43,7 +42,7 @@ const App: FunctionComponent = () => {
       />
       <HtmlPreview html={html} />
       <pre class="steam-formatting">{steam}</pre>
-    </div>
+    </Fragment>
   );
 };
 
