@@ -4,13 +4,14 @@
   "env": { "browser": true, "es6": true, "worker": true }, // for allowJs
   // see https://github.com/preactjs/preact-cli/blob/v3.0.0-rc.9/.eslintrc#L20
   "settings": { "react": { "version": "preact", "pragma": "h" } },
-  "plugins": ["@typescript-eslint", "react-hooks"],
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "prettier",
     "prettier/@typescript-eslint",
     "prettier/react"
