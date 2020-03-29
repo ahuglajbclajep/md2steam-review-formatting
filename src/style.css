@@ -88,6 +88,11 @@ body {
   border-radius: 3px;
 }
 
+.html-preview ul {
+  margin: 0 0 8px 2em;
+  line-height: 18px;
+}
+
 .html-preview pre {
   padding: 12px;
   margin: 8px;

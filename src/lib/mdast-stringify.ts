@@ -1,5 +1,5 @@
 import { Processor } from "unified";
-import { Literal, Node, Parent } from "unist";
+import { Literal, Node } from "unist";
 
 // see https://github.com/syntax-tree/hast-util-to-html/tree/7.1.0 and
 // https://github.com/remarkjs/remark/tree/remark-stringify%407.0.4/packages/remark-stringify
@@ -19,6 +19,10 @@ const heading = (node: Heading): string => {
 
 const blockquote = (node: Parent): string => `[quote]${all(node)}[/quote]`;
 
+const list = (node: Parent): string => `[list]\n${all(node)}[/list]`;
+
+const listItem = (node: ListItem): string => `[*]${all(node.children[0])}\n`;
+
 const code = (node: Literal): string => `[code]\n${node.value}\n[/code]`;
 
 const text = (node: Literal): string => node.value as string;
@@ -30,20 +34,20 @@ const TODO = (): string => "";
 // see https://github.com/syntax-tree/mdast/tree/684631f
 const visitors: Record<string, (node: any) => string> = {
   root: all,
-  paragraph: paragraph,
-  heading: heading,
-  blockquote: blockquote,
-  list: TODO,
-  listItem: TODO,
+  paragraph,
+  heading,
+  blockquote,
+  list,
+  listItem,
   table: TODO,
   tableRow: TODO,
   tableCell: TODO,
-  code: code,
-  text: text,
+  code,
+  text,
   emphasis: helper("i"),
   strong: helper("b"),
   delete: helper("strike"),
-  link: link,
+  link,
 };
 
 function one(node: Node): string {
