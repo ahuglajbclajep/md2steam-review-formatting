@@ -5,39 +5,45 @@ import { Literal, Node, Parent } from "unist";
 // https://github.com/remarkjs/remark/tree/remark-stringify%407.0.4/packages/remark-stringify
 
 const all = (parent: Parent): string =>
-  parent.children.map(n => one(n)).join("");
+  parent.children.map((node) => one(node)).join("");
 
 const helper = (tag: string) => (node: Parent): string =>
   `[${tag}]${all(node)}[/${tag}]`;
 
+const paragraph = (node: Parent): string => `\n${all(node)}\n`;
+
 const heading = (node: Heading): string => {
   const depth = node.depth < 3 ? node.depth : 3;
-  return helper(`h${depth}`)(node) + "\n";
+  return helper(`h${depth}`)(node);
 };
 
-const code = (node: Literal): string => `[code]${node.value}[/code]`;
+const blockquote = (node: Parent): string => `[quote]${all(node)}[/quote]`;
+
+const code = (node: Literal): string => `[code]\n${node.value}\n[/code]`;
 
 const text = (node: Literal): string => node.value as string;
 
 const link = (node: Link): string => `[url=${node.url}]${all(node)}[/url]`;
 
+const TODO = (): string => "";
+
 // see https://github.com/syntax-tree/mdast/tree/684631f
 const visitors: Record<string, (node: any) => string> = {
   root: all,
-  paragraph: all,
+  paragraph: paragraph,
   heading: heading,
-  blockquote: () => "",
-  list: () => "",
-  listItem: () => "",
-  table: () => "",
-  tableRow: () => "",
-  tableCell: () => "",
+  blockquote: blockquote,
+  list: TODO,
+  listItem: TODO,
+  table: TODO,
+  tableRow: TODO,
+  tableCell: TODO,
   code: code,
   text: text,
   emphasis: helper("i"),
   strong: helper("b"),
   delete: helper("strike"),
-  link: link
+  link: link,
 };
 
 function one(node: Node): string {

@@ -52,7 +52,13 @@ body {
 
 .html-preview {
   font-family: Arial, Helvetica, Verdana, sans-serif;
+  line-height: 20px;
   border-width: 0 0 1px 1px;
+}
+
+.html-preview p {
+  margin-bottom: 8px;
+  white-space: pre-wrap;
 }
 
 .html-preview h1 {
@@ -71,8 +77,33 @@ body {
 
 .html-preview h3 {
   margin-bottom: 8px;
-  line-height: 20px;
   color: #5aa9d6;
+}
+
+.html-preview blockquote {
+  display: table;
+  padding: 12px 12px 4px;
+  margin: 8px;
+  border: 1px solid #56707f;
+  border-radius: 3px;
+}
+
+.html-preview pre {
+  padding: 12px;
+  margin: 8px;
+  font: 12px Consolas, monospace;
+  white-space: pre-wrap;
+  border: 1px solid #535354;
+  border-radius: 3px;
+}
+
+.html-preview a {
+  color: #c6d4df;
+  text-decoration: underline;
+}
+
+.html-preview a:hover {
+  color: #ebebeb;
 }
 
 .steam-formatting {
