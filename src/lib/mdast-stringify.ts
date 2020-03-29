@@ -1,14 +1,27 @@
 import { Processor } from "unified";
 import { Literal, Node, Parent } from "unist";
 
-export default function stringify(this: Processor): void {
-  this.Compiler = compiler;
-}
+// see https://github.com/syntax-tree/hast-util-to-html/tree/7.1.0 and
+// https://github.com/remarkjs/remark/tree/remark-stringify%407.0.4/packages/remark-stringify
 
-function compiler(node: Node): string {
-  return one(node);
-}
+const all = (parent: Parent): string =>
+  parent.children.map(n => one(n)).join("");
 
+const helper = (tag: string) => (node: Parent): string =>
+  `[${tag}]${all(node)}[/${tag}]`;
+
+const heading = (node: Heading): string => {
+  const depth = node.depth < 3 ? node.depth : 3;
+  return helper(`h${depth}`)(node) + "\n";
+};
+
+const code = (node: Literal): string => `[code]${node.value}[/code]`;
+
+const text = (node: Literal): string => node.value as string;
+
+const link = (node: Link): string => `[url=${node.url}]${all(node)}[/url]`;
+
+// see https://github.com/syntax-tree/mdast/tree/684631f
 const visitors: Record<string, (node: any) => string> = {
   root: all,
   paragraph: all,
@@ -19,13 +32,12 @@ const visitors: Record<string, (node: any) => string> = {
   table: () => "",
   tableRow: () => "",
   tableCell: () => "",
-  code: () => "",
+  code: code,
   text: text,
-  emphasis: emphasis,
-  strong: strong,
-  delete: deleteFn,
-  break: () => "",
-  link: () => "",
+  emphasis: helper("i"),
+  strong: helper("b"),
+  delete: helper("strike"),
+  link: link
 };
 
 function one(node: Node): string {
@@ -33,32 +45,7 @@ function one(node: Node): string {
   return visitor ? visitor(node) : "";
 }
 
-function all(parent: Parent): string {
-  return parent.children.map((n) => one(n)).join("");
-}
-
-function helper(tag: string, node: Parent): string {
-  const content = all(node);
-  return `[${tag}]${content}[/${tag}]`;
-}
-
-function heading(node: Heading): string {
-  const depth = node.depth < 3 ? node.depth : 3;
-  return helper(`h${depth}`, node) + "\n";
-}
-
-function text(node: Literal): string {
-  return node.value as string;
-}
-
-function emphasis(node: Parent): string {
-  return helper("i", node);
-}
-
-function strong(node: Parent): string {
-  return helper("b", node);
-}
-
-function deleteFn(node: Parent): string {
-  return helper("strike", node);
+// see https://github.com/unifiedjs/unified/tree/8.4.2#processorcompiler
+export default function stringify(this: Processor): void {
+  this.Compiler = one;
 }

@@ -5,3 +5,9 @@ type Heading = import("unist").Parent & {
   type: "heading";
   depth: number;
 };
+
+type Link = import("unist").Parent & {
+  type: "link";
+  url: string;
+  title: string;
+};
