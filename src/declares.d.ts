@@ -13,10 +13,3 @@ type Link = Parent & {
   url: string;
   title?: string;
 };
-
-type ListItem = Omit<Parent, "children"> & {
-  type: "listItem";
-  checked?: boolean;
-  spread?: boolean;
-  children: Parent[]; // mostly `Paragraph`
-};
