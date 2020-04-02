@@ -1,4 +1,4 @@
-// see https://github.com/GoogleChromeLabs/comlink-loader#singleton-mode
+// see https://github.com/GoogleChromeLabs/comlink-loader/tree/2.0.0#singleton-mode
 /* eslint-disable @typescript-eslint/require-await */
 
 import hastStringify from "rehype-stringify";

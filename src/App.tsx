@@ -41,8 +41,9 @@ const App: FunctionComponent = () => {
       <textarea
         class="markdown-edit"
         value={markdown}
-        spellcheck={false}
         onInput={onInput}
+        autoFocus
+        spellcheck={false}
       />
       <HtmlPreview html={html} />
       <pre class="steam-formatting">{steam}</pre>

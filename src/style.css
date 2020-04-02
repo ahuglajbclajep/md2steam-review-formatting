@@ -23,8 +23,8 @@
 }
 
 body {
-  overscroll-behavior: none;
-  background: #1b2838; /* for overscrolling in Safari */
+  overflow: hidden; /* works like `overscroll-behavior: none;` except iOS Safari */
+  background: #1b2838; /* for overscrolling in iOS Safari */
 }
 
 .container {
@@ -36,7 +36,7 @@ body {
 .container > * {
   padding: 1em;
   overflow-y: scroll;
-  font: 1em "Courier New", monospace;
+  font: 1.2em "Courier New", monospace;
   color: #acb2b8;
   overflow-wrap: break-word;
   background: #1b2838;
