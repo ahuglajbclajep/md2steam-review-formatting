@@ -4,12 +4,12 @@ import { useLayoutEffect, useRef } from "preact/hooks";
 
 // inspired by https://github.com/mizchi/mdbuf/blob/be1581f/src/main/components/organisms/Preview.tsx
 type Props = { html: string };
-const Preview: FunctionComponent<Props> = ({ html }) => {
+const Previewer: FunctionComponent<Props> = ({ html }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const request = requestAnimationFrame(() => {
-      morphdom(ref.current, `<div class="html-preview">${html}</div>`);
+      morphdom(ref.current, `<div>${html}</div>`, { childrenOnly: true });
     });
 
     return (): void => cancelAnimationFrame(request);
@@ -18,4 +18,4 @@ const Preview: FunctionComponent<Props> = ({ html }) => {
   return <div class="html-preview" ref={ref} />;
 };
 
-export default Preview;
+export default Previewer;

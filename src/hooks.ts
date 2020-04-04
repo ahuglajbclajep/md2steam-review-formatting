@@ -4,17 +4,17 @@ import { get, set } from "idb-keyval";
 import { Inputs, useCallback, useEffect, useRef } from "preact/hooks";
 
 const useStorage = <T>(
-  key: IDBValidKey
+  key: string
 ): [(value: T) => Promise<void>, () => Promise<T | null>] => {
   const save = useCallback((value: T) => set(key, value), []);
   const load = useCallback(() => get<T | null>(key), []);
+
   return [save, load];
 };
 
 const useEffectAsync = (
-  // cleanup function is not supported
-  effect: () => Promise<void>,
-  inputs: Inputs = []
+  effect: () => Promise<void>, // cleanup function is not supported
+  inputs?: Inputs
 ): void => {
   useEffect(() => {
     effect();

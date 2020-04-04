@@ -1,8 +1,8 @@
 import { Fragment, FunctionComponent, h, JSX } from "preact";
 import { useState } from "preact/hooks";
 import { useCtrlKeyDown, useEffectAsync, useStorage } from "./hooks";
-import HtmlPreview from "./HtmlPreview";
 import { convert, format } from "./lib/worker";
+import Previewer from "./Previewer";
 
 const readme = `# md2steam-formatting
 `;
@@ -45,7 +45,7 @@ const App: FunctionComponent = () => {
         autoFocus
         spellcheck={false}
       />
-      <HtmlPreview html={html} />
+      <Previewer html={html} />
       <pre class="steam-formatting">{steam}</pre>
     </Fragment>
   );
