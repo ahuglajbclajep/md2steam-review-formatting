@@ -51,7 +51,7 @@ body {
 }
 
 .html-preview {
-  font-family: Arial, Helvetica, Verdana, sans-serif;
+  font: 1em Arial, Helvetica, Verdana, sans-serif;
   line-height: 20px;
   border-width: 0 0 1px 1px;
 }
@@ -91,6 +91,18 @@ body {
 .html-preview ul {
   margin: 0 0 8px 2em;
   line-height: 18px;
+}
+
+.html-preview table {
+  margin-bottom: 8px;
+  border-collapse: collapse;
+}
+
+.html-preview tr > * {
+  padding: 4px;
+  font-size: 12px;
+  text-align: left;
+  border: 1px solid #4d4d4d;
 }
 
 .html-preview pre {

@@ -13,3 +13,14 @@ type Link = Parent & {
   url: string;
   title?: string;
 };
+
+type Table = Omit<Parent, "children"> & {
+  type: "table";
+  align?: "left" | "right" | "center";
+  children: TableRow[];
+};
+
+type TableRow = Omit<Parent, "children"> & {
+  type: "tableRow";
+  children: Parent[]; // TableCell only
+};

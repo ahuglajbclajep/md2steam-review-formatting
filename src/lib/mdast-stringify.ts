@@ -23,13 +23,21 @@ const listItem = (node: Parent): string =>
   // TODO: write the case of `Code` which is `Literal`
   `[*]${all(node.children[0] as Parent)}\n`;
 
+const table = (node: Table): string =>
+  `[table]\n${node.children
+    .map(
+      (tr, i) =>
+        `[tr]\n${tr.children
+          .map(helper(i === 0 ? "th" : "tb"))
+          .join("\n")}\n[/tr]`
+    )
+    .join("\n")}\n[/table]`;
+
 const code = (node: Literal): string => `[code]\n${node.value}\n[/code]`;
 
 const text = (node: Literal): string => node.value as string;
 
 const link = (node: Link): string => `[url=${node.url}]${all(node)}[/url]`;
-
-const TODO = (): string => "";
 
 // see https://github.com/syntax-tree/mdast/tree/684631f
 const visitors: Record<string, (node: any) => string> = {
@@ -39,9 +47,7 @@ const visitors: Record<string, (node: any) => string> = {
   blockquote,
   list,
   listItem,
-  table: TODO,
-  tableRow: TODO,
-  tableCell: TODO,
+  table,
   code,
   text,
   emphasis: helper("i"),
