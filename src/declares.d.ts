@@ -24,3 +24,5 @@ type TableRow = Omit<Parent, "children"> & {
   type: "tableRow";
   children: Parent[]; // TableCell only
 };
+
+type PrevContent = string | null;

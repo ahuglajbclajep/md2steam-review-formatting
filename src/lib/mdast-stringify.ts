@@ -1,71 +1,77 @@
-import { Processor } from "unified";
-import { Literal, Node } from "unist";
-
 // see https://github.com/syntax-tree/mdast-util-to-hast/tree/8.1.0 and
 // https://github.com/syntax-tree/hast-util-to-html/tree/7.1.0 and
 // https://github.com/remarkjs/remark/tree/remark-stringify%408.0.0/packages/remark-stringify
 
-const helper = (tag: string) => (node: Parent): string =>
+import { Processor } from "unified";
+import { Literal, Node } from "unist";
+
+// block content helper
+const block = (tag: string) => (node: Parent): string =>
+  `[${tag}]\n${all(node)}[/${tag}]\n`;
+
+// inline content helper
+const inline = (tag: string) => (node: Parent): string =>
   `[${tag}]${all(node)}[/${tag}]`;
 
-const paragraph = (node: Parent): string => `\n${all(node)}\n`;
+const paragraph = (node: Parent, prev: PrevContent): string =>
+  `${prev === "paragraph" ? "\n" : ""}${all(node)}\n`;
 
 const heading = (node: Heading): string => {
   const depth = node.depth < 3 ? node.depth : 3;
-  return helper(`h${depth}`)(node);
+  return `[h${depth}]${all(node)}[/h${depth}]\n`;
 };
 
-const blockquote = (node: Parent): string => `[quote]${all(node)}[/quote]`;
-
-const list = (node: Parent): string => `[list]\n${all(node)}[/list]`;
-
 const listItem = (node: Parent): string =>
-  // TODO: write the case of `Code` which is `Literal`
-  `[*]${all(node.children[0] as Parent)}\n`;
+  // if `node.children[0]` is `Code`, skip it
+  node.children[0].children ? `[*]${all(node.children[0] as Parent)}\n` : "";
 
-const table = (node: Table): string =>
-  `[table]\n${node.children
-    .map(
-      (tr, i) =>
-        `[tr]\n${tr.children
-          .map(helper(i === 0 ? "th" : "tb"))
-          .join("\n")}\n[/tr]`
-    )
-    .join("\n")}\n[/table]`;
+const table = (node: Table): string => {
+  const tableRows = node.children.map((tr, i) => {
+    const tableCells = tr.children.map(inline(i === 0 ? "th" : "tb"));
+    return `[tr]\n${tableCells.join("\n")}\n[/tr]\n`;
+  });
+  return `[table]\n${tableRows.join("")}[/table]\n`;
+};
 
-const code = (node: Literal): string => `[code]\n${node.value}\n[/code]`;
+const code = (node: Literal): string => `[code]\n${node.value}\n[/code]\n`;
 
 const text = (node: Literal): string => node.value as string;
 
 const link = (node: Link): string => `[url=${node.url}]${all(node)}[/url]`;
 
 // see https://github.com/syntax-tree/mdast/tree/684631f
-const visitors: Record<string, (node: any) => string> = {
+const visitors: Record<string, (node: any, prev: PrevContent) => string> = {
+  // block contents
   root: all,
   paragraph,
   heading,
-  blockquote,
-  list,
+  blockquote: block("quote"),
+  list: block("list"),
   listItem,
   table,
   code,
+  // inline contents
   text,
-  emphasis: helper("i"),
-  strong: helper("b"),
-  delete: helper("strike"),
+  emphasis: inline("i"),
+  strong: inline("b"),
+  delete: inline("strike"),
   link,
 };
 
-function one(node: Node): string {
+function one(node: Node, prev: PrevContent): string {
   const visitor = visitors[node.type];
-  return visitor ? visitor(node) : "";
+  return visitor ? visitor(node, prev) : "";
 }
 
 function all(parent: Parent): string {
-  // you can also pass `parent` and `index` if necessary
-  // see https://github.com/syntax-tree/mdast-util-to-hast/blob/8.1.0/lib/all.js#L16
-  // and https://github.com/syntax-tree/hast-util-to-html/blob/7.1.0/lib/all.js#L15
-  return parent.children.map((node) => one(node)).join("");
+  return (
+    parent.children
+      // you can also pass `parent` and `index` if necessary
+      // see https://github.com/syntax-tree/mdast-util-to-hast/blob/8.1.0/lib/all.js#L16
+      // and https://github.com/syntax-tree/hast-util-to-html/blob/7.1.0/lib/all.js#L15
+      .map((node, i) => one(node, i === 0 ? null : parent.children[i - 1].type))
+      .join("")
+  );
 }
 
 // see https://github.com/unifiedjs/unified/tree/9.0.0#processorcompiler
@@ -73,5 +79,5 @@ export default function stringify(this: Processor): void {
   // `all()` can be substituted, but usually the function based on `one()` is used
   // see https://github.com/syntax-tree/mdast-util-to-hast/blob/8.1.0/lib/index.js#L101
   // and https://github.com/syntax-tree/hast-util-to-html/blob/7.1.0/lib/index.js#L47
-  this.Compiler = one;
+  this.Compiler = (node): string => one(node, null);
 }
