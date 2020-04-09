@@ -1,9 +1,12 @@
-// see https://github.com/syntax-tree/mdast-util-to-hast/tree/8.1.0 and
+// see https://github.com/syntax-tree/mdast-util-to-hast/tree/8.2.0 and
 // https://github.com/syntax-tree/hast-util-to-html/tree/7.1.0 and
 // https://github.com/remarkjs/remark/tree/remark-stringify%408.0.0/packages/remark-stringify
 
 import { Processor } from "unified";
 import { Literal, Node } from "unist";
+
+// `type` of previous content
+type PrevContent = Node["type"] | null;
 
 // block content helper
 const block = (tag: string) => (node: Parent): string =>
@@ -17,15 +20,20 @@ const paragraph = (node: Parent, prev: PrevContent): string =>
   `${prev === "paragraph" ? "\n" : ""}${all(node)}\n`;
 
 const heading = (node: Heading): string => {
+  // steam does not support `[h4]` or below
   const depth = node.depth < 3 ? node.depth : 3;
+  // `Heading` children are only inline content, so line breaks should be at the end only
   return `[h${depth}]${all(node)}[/h${depth}]\n`;
 };
 
 const listItem = (node: Parent): string =>
-  // if `node.children[0]` is `Code`, skip it
+  // `ListItem` is a wrapper and has only one child content
+  // if child content is `Code`, skip it
   node.children[0].children ? `[*]${all(node.children[0] as Parent)}\n` : "";
 
+// see https://github.com/syntax-tree/mdast-util-to-hast/blob/8.2.0/lib/handlers/table.js
 const table = (node: Table): string => {
+  // `TableRow` and `Table` are block contents
   const tableRows = node.children.map((tr, i) => {
     const tableCells = tr.children.map(inline(i === 0 ? "th" : "tb"));
     return `[tr]\n${tableCells.join("\n")}\n[/tr]\n`;

@@ -22,7 +22,5 @@ type Table = Omit<Parent, "children"> & {
 
 type TableRow = Omit<Parent, "children"> & {
   type: "tableRow";
-  children: Parent[]; // TableCell only
+  children: Parent[]; // `TableCell` only
 };
-
-type PrevContent = string | null;

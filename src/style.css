@@ -93,6 +93,10 @@ body {
   line-height: 18px;
 }
 
+.html-preview li input[type="checkbox"] {
+  display: none;
+}
+
 .html-preview table {
   margin-bottom: 8px;
   border-collapse: collapse;
