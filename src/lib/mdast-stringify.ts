@@ -26,6 +26,9 @@ const heading = (node: Heading): string => {
   return `[h${depth}]${all(node)}[/h${depth}]\n`;
 };
 
+const list = (node: List): string =>
+  node.ordered ? block("olist")(node) : block("list")(node);
+
 const listItem = (node: Parent): string =>
   // `ListItem` is a wrapper and has only one child content
   // if child content is `Code`, skip it
@@ -45,7 +48,10 @@ const code = (node: Literal): string => `[code]\n${node.value}\n[/code]\n`;
 
 const text = (node: Literal): string => node.value as string;
 
-const link = (node: Link): string => `[url=${node.url}]${all(node)}[/url]`;
+const link = (node: Link): string =>
+  node.children[0].value === node.url
+    ? node.url
+    : `[url=${node.url}]${all(node)}[/url]`;
 
 // see https://github.com/syntax-tree/mdast/tree/684631f
 const visitors: Record<string, (node: any, prev: PrevContent) => string> = {
@@ -54,7 +60,7 @@ const visitors: Record<string, (node: any, prev: PrevContent) => string> = {
   paragraph,
   heading,
   blockquote: block("quote"),
-  list: block("list"),
+  list,
   listItem,
   table,
   code,

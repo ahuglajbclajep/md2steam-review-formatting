@@ -88,7 +88,8 @@ body {
   border-radius: 3px;
 }
 
-.html-preview ul {
+.html-preview ul,
+.html-preview ol {
   margin: 0 0 8px 2em;
   line-height: 18px;
 }
