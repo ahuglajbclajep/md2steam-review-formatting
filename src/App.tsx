@@ -5,6 +5,15 @@ import { convert, format } from "./lib/worker";
 import Previewer from "./Previewer";
 
 const readme = `# md2steam-formatting
+
+An **experimental** editor that converts Markdown to [Steam Text Formatting](https://steamcommunity.com/comment/Recommendation/formattinghelp).
+Although not reflected in the preview, you can also use Steam markup tags.
+
+- save:   ctrl + s
+- copy:   ctrl + q
+- format: ctrl + d
+
+GitHub: <https://github.com/ahuglajbclajep/md2steam-formatting>
 `;
 
 const App: FunctionComponent = () => {
@@ -23,8 +32,8 @@ const App: FunctionComponent = () => {
   }, []);
 
   useCtrlKeyDown("s", () => save(markdown));
-  useCtrlKeyDown("d", () => navigator.clipboard.writeText(steam));
-  useCtrlKeyDown("f", async () => setMarkdown(await format(markdown)));
+  useCtrlKeyDown("q", () => navigator.clipboard.writeText(steam));
+  useCtrlKeyDown("d", async () => setMarkdown(await format(markdown)));
 
   const onInput: JSX.GenericEventHandler<HTMLTextAreaElement> = async (e) => {
     // maybe `currentTarget.value` can only be read once?

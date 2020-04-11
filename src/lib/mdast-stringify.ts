@@ -17,6 +17,7 @@ const inline = (tag: string) => (node: Parent): string =>
   `[${tag}]${all(node)}[/${tag}]`;
 
 const paragraph = (node: Parent, prev: PrevContent): string =>
+  // `Paragraph should not be adjacent to each other
   `${prev === "paragraph" ? "\n" : ""}${all(node)}\n`;
 
 const heading = (node: Heading): string => {
@@ -49,6 +50,7 @@ const code = (node: Literal): string => `[code]\n${node.value}\n[/code]\n`;
 const text = (node: Literal): string => node.value as string;
 
 const link = (node: Link): string =>
+  // to support widget generation when the URL is directly pasted
   node.children[0].value === node.url
     ? node.url
     : `[url=${node.url}]${all(node)}[/url]`;
