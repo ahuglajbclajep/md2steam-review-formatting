@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 
 import hastStringify from "rehype-stringify";
+import disableTokenizers from "remark-disable-tokenizers";
 import parse from "remark-parse";
 import mutate from "remark-rehype";
 import unified from "unified";
@@ -18,7 +19,11 @@ let plugin: typeof import("prettier/parser-markdown") | undefined;
 })();
 
 async function convert(markdown: string): Promise<[string, string]> {
-  const mdast = unified().use(parse).parse(markdown);
+  const mdast = unified()
+    .use(parse)
+    // disable the parsing of `[]` so that Steam markup tags can also be used
+    .use(disableTokenizers, { inline: ["reference"] })
+    .parse(markdown);
 
   const mdast2html = async (mdast: Node): Promise<string> => {
     const hast = await unified().use(mutate).run(mdast);
