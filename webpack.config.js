@@ -22,7 +22,7 @@ module.exports = (env, { mode }) => {
         },
         {
           test: /\.[tj]sx?$/,
-          use: "ts-loader",
+          loader: "ts-loader",
           exclude: /node_modules/,
         },
         {

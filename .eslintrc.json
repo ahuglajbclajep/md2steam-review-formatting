@@ -30,5 +30,7 @@
       "files": ["*.js", "*.jsx"],
       "rules": { "@typescript-eslint/explicit-function-return-type": "off" }
     }
-  ]
+  ],
+  // for VS Code
+  "ignorePatterns": ["dist", "webpack.config.js"]
 }

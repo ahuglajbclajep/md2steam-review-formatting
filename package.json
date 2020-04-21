@@ -6,28 +6,28 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "rm -rf dist && webpack -p",
-    "lint:ts": "eslint --fix 'src/**/*.[tj]s{,x}'",
-    "lint:css": "stylelint --fix 'src/**/*.css'",
-    "format": "prettier --ignore-path .gitignore --write .",
+    "lint:format": "prettier -c --ignore-path .gitignore .",
+    "lint:ts": "eslint 'src/**/*.[tj]s{,x}'",
+    "lint:css": "stylelint -f verbose 'src/**'",
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "idb-keyval": "^3.2.0",
     "morphdom": "^2.5.12",
-    "preact": "^10.4.0",
+    "preact": "^10.4.1",
     "prettier": "^2.0.4",
     "rehype-stringify": "^7.0.0",
     "remark-disable-tokenizers": "^1.0.24",
-    "remark-parse": "^8.0.0",
+    "remark-parse": "^8.0.1",
     "remark-rehype": "^6.0.0",
     "unified": "^9.0.0"
   },
   "devDependencies": {
     "@types/prettier": "^2.0.0",
-    "@types/webpack": "^4.41.10",
+    "@types/webpack": "^4.41.12",
     "@types/webpack-dev-server": "^3.10.1",
-    "@typescript-eslint/eslint-plugin": "^2.27.0",
-    "@typescript-eslint/parser": "^2.27.0",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
     "comlink-loader": "^2.0.0",
     "css-loader": "^3.5.2",
     "eslint": "^6.8.0",
@@ -38,15 +38,16 @@
     "html-webpack-plugin": "^4.2.0",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "stylelint": "^13.3.1",
+    "stylelint": "^13.3.2",
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-config-recess-order": "^2.0.4",
     "stylelint-config-standard": "^20.0.0",
-    "ts-loader": "^6.2.2",
+    "ts-loader": "^7.0.1",
     "typescript": "^3.8.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "workbox-webpack-plugin": "^5.1.2"
-  }
+  },
+  "prettier": {}
 }
