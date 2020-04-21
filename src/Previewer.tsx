@@ -2,13 +2,14 @@
 
 import morphdom from "morphdom";
 import { FunctionComponent, h } from "preact";
-import { useLayoutEffect, useRef } from "preact/hooks";
+import { memo } from "preact/compat";
+import { useEffect, useRef } from "preact/hooks";
 
 type Props = { html: string };
 const Previewer: FunctionComponent<Props> = ({ html }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const request = requestAnimationFrame(() => {
       morphdom(ref.current, `<div>${html}</div>`, { childrenOnly: true });
     });
@@ -19,4 +20,4 @@ const Previewer: FunctionComponent<Props> = ({ html }) => {
   return <div class="html-preview" ref={ref} />;
 };
 
-export default Previewer;
+export default memo(Previewer);
