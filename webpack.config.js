@@ -35,6 +35,7 @@ module.exports = (env, { mode }) => {
       new HtmlWebpackPlugin({
         template: "src/index.ejs",
         title: process.env.npm_package_name,
+        desc: process.env.npm_package_description,
       }),
       new MiniCssExtractPlugin(),
       new GenerateSW({
