@@ -10,7 +10,7 @@ module.exports = (env, { mode }) => {
   return {
     // see https://github.com/webpack/webpack-dev-server/issues/1327
     mode: "development",
-    entry: "./src/index.tsx",
+    entry: "./src/index",
     // see https://github.com/webpack-contrib/worker-loader/issues/142
     output: { globalObject: "self" },
     module: {

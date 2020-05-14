@@ -17,9 +17,6 @@
     "prettier/react"
   ],
   "rules": {
-    // see https://reactjs.org/docs/hooks-rules
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
     "react/no-unknown-property": [2, { "ignore": ["class", "spellcheck"] }],
     "@typescript-eslint/no-use-before-define": ["error", "nofunc"]
@@ -32,5 +29,5 @@
     }
   ],
   // for VS Code
-  "ignorePatterns": ["dist", "webpack.config.js"]
+  "ignorePatterns": ["dist", "*.config.js"]
 }
