@@ -1,9 +1,9 @@
-# md2steam-formatting
+# md2steam-review-formatting
 
 An **experimental** editor that converts Markdown to [Steam Text Formatting](https://steamcommunity.com/comment/Recommendation/formattinghelp).  
 Although not reflected in the preview, you can also use Steam markup tags.
 
-Try here: <https://ahuglajbclajep.github.io/md2steam-formatting>
+Try here: <https://ahuglajbclajep.github.io/md2steam-review-formatting>
 
 ## Usage
 

@@ -1,7 +1,7 @@
 {
-  "name": "md2steam-formatting",
+  "name": "md2steam-review-formatting",
   "version": "1.0.0",
-  "description": "An experimental editor that converts Markdown to Steam Text Formatting.",
+  "description": "An experimental editor that converts Markdown to Steam review/wiki formatting.",
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --open",
