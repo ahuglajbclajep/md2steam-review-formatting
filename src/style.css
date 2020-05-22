@@ -36,7 +36,7 @@ body {
 .container > * {
   padding: 1em;
   overflow-y: scroll;
-  font: 1.2em "Courier New", monospace;
+  font: 1.1em Menlo, Monaco, Consolas, "Courier New", Meiryo, monospace;
   color: #acb2b8;
   overflow-wrap: break-word;
   background: #1b2838;
@@ -126,6 +126,10 @@ body {
 
 .html-preview a:hover {
   color: #ebebeb;
+}
+
+.html-preview hr {
+  display: none;
 }
 
 .steam-formatting {
