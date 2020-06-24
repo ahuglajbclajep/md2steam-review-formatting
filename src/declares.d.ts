@@ -1,4 +1,3 @@
-declare module "rehype-stringify";
 declare module "remark-disable-tokenizers";
 
 type Parent = import("unist").Parent;
