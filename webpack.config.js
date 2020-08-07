@@ -27,15 +27,15 @@ module.exports = (env, { mode }) => {
         },
         {
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, `css-loader?sourceMap=${dev}`],
+          use: [MiniCssExtractPlugin.loader, "css-loader"],
         },
       ],
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: "src/index.ejs",
         title: process.env.npm_package_name,
         desc: process.env.npm_package_description,
+        scriptLoading: "defer",
       }),
       new MiniCssExtractPlugin(),
       new GenerateSW({
