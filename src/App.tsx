@@ -48,8 +48,7 @@ const App: FunctionComponent = () => {
   );
 
   return (
-    // see https://github.com/microsoft/TypeScript/issues/20469
-    <Fragment>
+    <>
       <textarea
         class="markdown-edit"
         value={markdown}
@@ -59,7 +58,7 @@ const App: FunctionComponent = () => {
       />
       <Previewer html={html} />
       <pre class="steam-formatting">{steam}</pre>
-    </Fragment>
+    </>
   );
 };
 

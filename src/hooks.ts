@@ -35,10 +35,10 @@ const useCtrlKeyDown = (key: string, handler: Handler): void => {
       }
     };
 
-    window.addEventListener("keydown", listener);
+    document.addEventListener("keydown", listener);
 
     return (): void => {
-      window.removeEventListener("keydown", listener);
+      document.removeEventListener("keydown", listener);
     };
   }, []);
 };

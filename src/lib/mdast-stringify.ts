@@ -3,7 +3,7 @@
 // https://github.com/remarkjs/remark/tree/remark-stringify%408.0.0/packages/remark-stringify
 
 import { Processor } from "unified";
-import { Literal, Node } from "unist";
+import { Node } from "unist";
 
 // `type` of previous content
 type PrevContent = Node["type"] | null;
@@ -28,7 +28,7 @@ const heading = (node: Heading): string => {
 };
 
 const list = (node: List): string =>
-  node.ordered ? block("olist")(node) : block("list")(node);
+  block(node.ordered ? "olist" : "list")(node);
 
 const listItem = (node: Parent): string =>
   // `ListItem` is a wrapper and has only one child content
@@ -47,7 +47,7 @@ const table = (node: Table): string => {
 
 const code = (node: Literal): string => `[code]\n${node.value}\n[/code]\n`;
 
-const text = (node: Literal): string => node.value as string;
+const text = (node: Literal): string => node.value;
 
 const link = (node: Link): string =>
   // to support widget generation when the URL is directly pasted
