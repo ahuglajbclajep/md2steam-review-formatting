@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { GenerateSW } = require("workbox-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin"); // from webpack
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const package = require("./package.json");
 
 /** @type {(env: typeof process.env, argv: { mode?: string }) => import("webpack").Configuration} */
 module.exports = (env, { mode }) => {
@@ -27,14 +28,20 @@ module.exports = (env, { mode }) => {
         },
         {
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, "css-loader"],
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: { esModule: true },
+            },
+            "css-loader",
+          ],
         },
       ],
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: process.env.npm_package_name,
-        desc: process.env.npm_package_description,
+        title: package.name,
+        desc: package.description,
         scriptLoading: "defer",
       }),
       new MiniCssExtractPlugin(),
