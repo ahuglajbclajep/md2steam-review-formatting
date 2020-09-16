@@ -17,8 +17,8 @@
   ],
   "rules": {
     "react/prop-types": "off",
-    "react/no-unknown-property": [2, { "ignore": ["class", "spellcheck"] }],
-    "@typescript-eslint/no-unused-vars": [2, { "varsIgnorePattern": "Fragment" }],
+    "react/no-unknown-property": ["error", { "ignore": ["class", "spellcheck"] }],
+    "@typescript-eslint/no-unused-vars": ["warn", { "varsIgnorePattern": "Fragment" }],
     "@typescript-eslint/no-floating-promises": "off"
   },
   "overrides": [

@@ -4,7 +4,8 @@ import { useCtrlKeyDown, useEffectAsync, useStorage } from "./hooks";
 import { convert, format } from "./lib/worker";
 import Previewer from "./Previewer";
 
-const readme = `# md2steam-review-formatting
+const readme = `\
+# md2steam-review-formatting
 
 An **experimental** editor that converts Markdown to [Steam Text Formatting](https://steamcommunity.com/comment/Recommendation/formattinghelp).
 Although not reflected in the preview, you can also use Steam markup tags.
