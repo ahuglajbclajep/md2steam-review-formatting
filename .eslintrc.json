@@ -1,8 +1,8 @@
 {
   "parser": "@typescript-eslint/parser",
-  "parserOptions": { "project": "tsconfig.json" },
+  "parserOptions": { "project": "./tsconfig.json" },
   "env": { "browser": true, "es6": true, "worker": true }, // for allowJs
-  // see https://github.com/preactjs/preact-cli/blob/v3.0.0-rc.9/.eslintrc#L20
+  // see https://github.com/preactjs/preact-cli/blob/v3.0.3/.eslintrc#L20
   "settings": { "react": { "version": "preact", "pragma": "h" } },
   "plugins": ["@typescript-eslint"],
   "extends": [
@@ -22,7 +22,6 @@
     "@typescript-eslint/no-floating-promises": "off"
   },
   "overrides": [
-    // see https://github.com/typescript-eslint/typescript-eslint/issues/906
     {
       "files": ["*.js", "*.jsx"],
       "rules": { "@typescript-eslint/explicit-module-boundary-types": "off" }
